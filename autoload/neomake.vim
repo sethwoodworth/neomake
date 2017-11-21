@@ -995,7 +995,7 @@ function! s:clean_action_queue_augroup() abort
         return
     endif
     let left_events = []
-    for [events, v] in s:action_queue
+    for [events, _] in s:action_queue
         for event in events
             let left_events += [event]
         endfor
