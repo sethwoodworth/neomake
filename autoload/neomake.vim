@@ -995,7 +995,7 @@ function! s:clean_action_queue_augroup() abort
         return
     endif
     let left_events = []
-    for events in keys(s:action_queue)
+    for [events, v] in s:action_queue
         for event in events
             let left_events += [event]
         endfor
@@ -1313,7 +1313,7 @@ endfunction
 function! s:already_queued_actions(jobinfo) abort
     " Check if there are any queued actions for this job.
     let queued_actions = []
-    for v in values(s:action_queue)
+    for [_, v] in s:action_queue
         if v[1][0] == a:jobinfo
             let queued_actions += [v[0]]
         endif
@@ -1390,7 +1390,7 @@ function! s:clean_make_info(make_info, ...) abort
     " Assert: there should be no queued actions for jobs or makes.
     if exists('g:neomake_test_messages')  " is_testing
         let queued = []
-        for v in values(s:action_queue)
+        for [_, v] in s:action_queue
             if has_key(v[1][0], 'make_id')
                 let jobinfo = v[1][0]
                 if jobinfo.make_id == make_id && v[0] !=# 's:CleanJobinfo'
@@ -2390,7 +2390,7 @@ function! s:handle_next_job(prev_jobinfo) abort
     endwhile
 
     " Cleanup make info, but only if there are no queued actions.
-    for v in values(s:action_queue)
+    for [_, v] in s:action_queue
         if v[1][0] == make_info
             call neomake#utils#DebugMessage('Skipping cleaning of make info for queued actions.', make_info)
             return {}
