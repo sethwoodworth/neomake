@@ -848,7 +848,7 @@ Execute (job finishes while in tabline function):
 
     NeomakeTestsWaitForMessage 'Error during pcall: Vim(laddexpr):E523: Not allowed here:                 laddexpr a:lines.', 3
     AssertNeomakeMessage '\v\(in function .*\.\.\<SNR\>\d+_NeomakeTestTabline\[\d+\]\.\..*\)', 3
-    AssertNeomakeMessage 'Queueing action: s:ProcessJobOutput for Timer.', 3
+    AssertNeomakeMessage 'Queueing action: s:ProcessJobOutput for Timer, WinEnter.', 3
 
     AssertNeomakeMessage 'Skipping cleaning of job info because of queued actions: s:ProcessJobOutput.'
     AssertNeomakeMessage 'Queueing action: s:CleanJobinfo for WinEnter.'
