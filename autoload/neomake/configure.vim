@@ -170,7 +170,6 @@ function! s:automake_delayed_cb(timer) abort
         augroup neomake_automake_retry
           au! * <buffer>
           autocmd CompleteDone <buffer> call s:do_postponed_automake()
-          autocmd CompleteDone <buffer> Log 'CD'
         augroup END
         return
     endif
